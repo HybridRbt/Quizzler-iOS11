@@ -25,6 +25,7 @@ class ViewController: UIViewController {
         
         let firstQuestion = allQuestions.list[0]
         questionLabel.text = firstQuestion.questionText
+        updateUI()
     }
 
 
@@ -43,13 +44,17 @@ class ViewController: UIViewController {
     
     
     func updateUI() {
-      
+        scoreLabel.text = "Score: \(score)"
+        progressLabel.text = "\(questionNum + 1) / 13"
+        
+        progressBar.frame.size.width = (view.frame.size.width / 13) * CGFloat(questionNum + 1)
     }
     
 
     func nextQuestion() {
         if questionNum <= 12 {
             questionLabel.text = allQuestions.list[questionNum].questionText
+            updateUI()
         } else {
             let alert = UIAlertController(title: "End of Quiz", message: "You have finished all the questions! Do you want to start over?", preferredStyle: .alert)
             
